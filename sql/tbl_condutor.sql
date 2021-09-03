@@ -1,0 +1,36 @@
+CREATE TABLE condutor
+(
+  cod_condutor serial NOT NULL,
+  cod_acidente integer NOT NULL,
+  cod_veiculo integer NOT NULL,
+  prontuario character varying(30),
+  escolaridade integer,
+  profissao integer,
+  comportamento integer,
+  condicao_fisica integer,
+  habilitacao integer,
+  data_hab date,
+  data_nas date,
+  c_semdanos integer,
+  c_feridoleve integer,
+  c_feridograve integer,
+  c_morto integer,
+  cidade_origem integer,
+  estado_origem integer,
+  cond_sexo sexo,
+  CONSTRAINT condutor_pk PRIMARY KEY (cod_condutor),
+  CONSTRAINT codveiculo_unique UNIQUE (cod_veiculo),
+  CONSTRAINT checa_cidadeorigem CHECK (cidade_origem > 0),
+  CONSTRAINT checa_comportamento CHECK (comportamento > 0),
+  CONSTRAINT checa_condicao CHECK (condicao_fisica > 0),
+  CONSTRAINT checa_escolaridade CHECK (escolaridade > 0),
+  CONSTRAINT checa_feridograve CHECK (c_feridograve >= 0 AND c_feridograve <= 1),
+  CONSTRAINT checa_feridoleve CHECK (c_feridoleve >= 0 AND c_feridoleve <= 1),
+  CONSTRAINT checa_habilitacao CHECK (habilitacao > 0),
+  CONSTRAINT checa_morto CHECK (c_morto >= 0 AND c_morto <= 1),
+  CONSTRAINT checa_profissao CHECK (profissao > 0),
+  CONSTRAINT checa_semdanos CHECK (c_semdanos >= 0 AND c_semdanos <= 1),
+  CONSTRAINT cheva_estadoorigem CHECK (estado_origem > 0)
+)
+WITH (OIDS=FALSE);
+ALTER TABLE condutor OWNER TO postgres;

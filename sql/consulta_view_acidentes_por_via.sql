@@ -1,0 +1,1 @@
+select "Logradouro", "Total Por Logradouro", trunc("%"::numeric,2) from view_acidentes_por_via
